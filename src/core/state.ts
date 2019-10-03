@@ -60,7 +60,11 @@ export class State {
   challenge: ChallengeStateResponse | null = null;
   clientSessionIdLifetime: number = 1200000;
   pigeonSessionIdLifetime: number = 1200000;
+  clientSessionId: string = this.generateTemporaryGuid('clientSessionId', 1);
 
+  regenerateSessionId() {
+    this.clientSessionId = this.generateTemporaryGuid('clientSessionId', 1);
+  }
   /**
    * The current application session ID.
    *
@@ -69,9 +73,9 @@ export class State {
    *
    * We will update it once an hour
    */
-  public get clientSessionId(): string {
-    return this.generateTemporaryGuid('clientSessionId', this.clientSessionIdLifetime);
-  }
+  // public get clientSessionId(): string {
+  //   return this.generateTemporaryGuid('clientSessionId', this.clientSessionIdLifetime);
+  // }
 
   public get pigeonSessionId(): string {
     return this.generateTemporaryGuid('pigeonSessionId', this.pigeonSessionIdLifetime);
